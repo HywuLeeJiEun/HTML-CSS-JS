@@ -1,0 +1,45 @@
+/* * = 전체 선택자, 즉 모든 요소 */
+* {
+    box-sizing: border-box;
+}
+
+/* body 태그에 속한 요소 */
+body {
+    margin: 0;
+    min-width: 992px;
+    font-family: "Helvetica";
+}
+
+/* navbar css */
+.navbar {
+    height: 60px;
+    padding-left: 30px;
+}
+
+.navbar ul{
+    float: right;
+    margin-right: 70px;
+}
+
+.navbar li{
+    list-style-type: none;
+    float: left;
+    margin-right: 20px;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: black;
+    font-style: bold;
+    font-size: 15px;
+}
+
+.logo{
+    line-height: 60px;
+    float: left;
+}
+
+.logo img{
+    vertical-align: middle;
+    margin-left: 50px;
+}
