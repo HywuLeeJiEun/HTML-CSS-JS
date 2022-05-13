@@ -5,15 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlappyBirdGame 구현하기</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- FlappyBirdGame의 실행 공간이 될 canvas 짜기 -->
     <h3>FlappyBiredGame</h3>
+    <div class="game">
+        <canvas id="canvas" width="288" height="512">
+        </canvas>
 
-    <canvas id="canvas" width="288" height="512">
-    </canvas>
+        <script src="flappyBird.js"></script>
 
-    <script src="flappyBird.js"></script>
+
+        <!-- 배경음악 설정 -->
+        <!-- 2018년 이후 크롬 정책으로 인해 음원 자동재생은 불가 -->
+        <script>
+            var audio = new Audio('sounds/bgsound.mp3'); // 출처 [ pixabay ]
+
+            audio.addEventListener('ended', function() { 
+                this.currentTime = 0; //음원 시작 지점 설정 
+                this.play(); //음원 플레이
+            }, false);
+            
+        </script>
+        
+
+        <!-- 게임 배경음 설정 버튼 -->
+        <br>
+        background sound play <br>
+        [
+        <input type="button" onclick="audio.play();" value="PLAY"> <!--재생-->
+        <input type="button" onclick="audio.pause();" value="PAUSE"> <!--일시정지-->
+        ]
+    </div>
 </body>
 </html>
 

@@ -22,6 +22,7 @@ pipeDown.src = "img/pipeDown.png"; //아래쪽 파이프
 // 이미지처럼 사용될 오디오를 불러옴.
 var fly = new Audio();
 var scor = new Audio();
+var bg_sound = new Audio();
 
 fly.src = "sounds/fly.mp3";
 scor.src = "sounds/score.mp3";
@@ -29,7 +30,7 @@ scor.src = "sounds/score.mp3";
 
 // variables (변수설정)
 // 게임 진행에 필요한 객체들의 변수를 설정한다. ( 점수, 중력, ... )
-var gap = 85; // 파이프의 떨어진 공간 크기 
+var gap = 100; // 파이프의 떨어진 공간 크기 
 var constant;
 
 var bX = 10;
@@ -45,7 +46,7 @@ var score = 0;
 document.addEventListener("keydown",moveUp);
 // moveUp을 통해 캐릭터가 장애물을 피해 올라갈 수 있도록 함. 
 function moveUp(){
-    bY -= 25;   // -(위쪽), +(아래쪽)으로 가도록 함. 
+    bY -= 30;   // -(위쪽), +(아래쪽)으로 가도록 함. 
     fly.play(); // 사운드 플레이
 }
 
@@ -67,7 +68,7 @@ pipe[0] = {
 function draw(){
     // 배경 이미지 그려주기 
     ctx.drawImage(bg,0,0);
-    
+
     
     for(var i = 0; i < pipe.length; i++){
         // 값 변경이 일어나지 않게 하기 위해 const(constant) 사용
@@ -88,7 +89,7 @@ function draw(){
         // detect collision (충돌 감지)
         // 논리연산자를 이용해 상황 판단 (&&(true), ||(true가 하나여도 만족))
         if( bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeUp.width && (bY <= pipe[i].y + pipeUp.height || bY+bird.height >= pipe[i].y+constant) || bY + bird.height >=  cvs.height - fg.height){
-            location.reload(); // 페이지를 재시작(reload)
+             location.reload(); // 페이지를 재시작(reload)
         }
         
 
