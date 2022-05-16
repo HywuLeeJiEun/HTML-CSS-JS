@@ -1,0 +1,13 @@
+/* 모든 형태의 요소 선택(*)  */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+canvas {
+    background: #eee;
+    /* 블록형태. 즉, 게임의 배경이 됨. */
+    display: block; 
+    /* auto를 통해 중앙 배치 */
+    margin: 0 auto;
+}
