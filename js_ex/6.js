@@ -1,7 +1,8 @@
 var canvas = document.getElementById("game_canvas");
 var ctx = canvas.getContext("2d");
 
-// 4. 키보드를 사용해 패들 움직이기
+// 6. 부술 벽 객체 생성
+
 
 // 변수 설정
 var ballRadius = 10;
@@ -21,6 +22,25 @@ var paddleX = (canvas.width-paddleWidth)/2;
 // 패들 움직임을 설정하기 위한 변수 
 var rightPressed = false;
 var leftPressed = false;
+
+// 부술 벽 객체의 설정
+var brickRowCount = 5; // 행 →
+var brickColumnCount = 3; // 열 ↓
+
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 30;
+var brickOffsetLeft = 30;
+
+// 객체의 개수 넣기 ( 2차원 배열)
+var bricks = [];
+for(var c=0; c<brickColumnCount; c++) {
+    bricks[c] = []; //열 
+    for(var r=0; r<brickRowCount; r++) {
+        bricks[c][r] = { x: 0, y: 0 }; //행
+    }
+}
 
 
 // 키보드 이벤트를 사용하기 위한 이벤트 리스너 
@@ -65,21 +85,50 @@ function drawPaddle() {
     ctx.closePath();
 }
 
+// 부술 벽 객체 함수
+function drawBricks() {
+    for(var c=0; c<brickColumnCount; c++) {
+        for(var r=0; r<brickRowCount; r++) {
+            var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
+            var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
+            bricks[c][r].x = brickX;
+            bricks[c][r].y = brickY;
+            ctx.beginPath();
+            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+}
+
+
 
 // 원의 이동에 대한 조건이 포함된 함수 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // 벽 객체 뿌리기
+    drawBricks();
     drawBall(); 
-    // 패딩에 대한 조건을 포함!
     drawPaddle();
 
     // 공이 x좌표(width)의 범위를 넘어갈때, 
     if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
         dx = -dx; // 다른 방향으로 틀어준다. 
     }
-    // 공이 y좌표(height)의 범위를 넘어갈때,
-    if (y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+    if (y + dy < ballRadius) {
         dy = -dy; // 다른 방향으로 틀어준다. 
+    }
+    // 위쪽 벽에는 맞아도 게임 오버 되지 않도록 설정
+    else if (y + dy > canvas.height - ballRadius) {
+        if(x > paddleX && x < paddleX + paddleWidth) {
+            dy = -dy;
+        }
+        else { // 아랫벽에 닿을 경우, 게임 오버!
+            // + var game을 선언하지 않음!
+            alert("Game Over");
+            document.location.reload(); 
+        }
     }
 
     // 패들이 x너비를 넘기지 않고 오른쪽으로 움직이게 함.
@@ -97,8 +146,6 @@ function draw() {
 }
 
 
-
-setInterval(draw, 10);
-
-
+// alert 사용을 위해 game 변수 설정
+ setInterval(draw, 10);
 
