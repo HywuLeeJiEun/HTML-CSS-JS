@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google 구현하기</title>
+    <!-- tip. 코드는 아래줄에 있을수록 css 우선순위가 높다. (style.css(상위) > bootstrap) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+     rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+     crossorigin="anonymous">
+    <!-- css를 연결하는 작업 (link) -->
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <!-- 확장프로그램을 통해 각 글자를 감싸주기 (htmltagwrap) -->
+    <h1><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></h1>
+    
+    <!-- form태그를 이용해 정보가 전달되도록 구현 -->
+    <form action="https://www.google.com/search" method="GET">
+        <div class="mx-auto search-bar mt-5 input-group mb-3">
+            <input name="q" type="text" class="form-control rounded-pill" placeholder="Google 검색 또는 URL 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+        </div>
+    </form>
+</body>
+</html>
